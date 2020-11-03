@@ -1,4 +1,4 @@
-# <img src="carina.png" width="40" height="40" /> # Carina
+# <img src="carina.png" width="40" height="40" /> Carina
 
 Footnotes:
 ----------
