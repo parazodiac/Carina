@@ -33,3 +33,17 @@ pub fn u64_to_cb_string(cb_id: u64) -> Result<String, Box<dyn Error>> {
 
     Ok(cb_str)
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::barcode::*;
+
+    #[test]
+    fn test_cb_string_to_u64() {
+        let cb_id = cb_string_to_u64("A".repeat(16).as_bytes()).unwrap();
+        assert_eq!(cb_id, 0);
+
+        let cb_id = cb_string_to_u64("T".repeat(16).as_bytes()).unwrap();
+        assert_eq!(cb_id, u32::MAX as u64);
+    }
+}
