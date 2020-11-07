@@ -16,10 +16,10 @@ pub fn cb_string_to_u64(cb_str: &[u8]) -> Result<u64, Box<dyn Error>> {
     Ok(cb_id)
 }
 
-pub fn u64_to_cb_string(cb_id: u64) -> Result<String, Box<dyn Error>> {
+pub fn u64_to_cb_string(cb_id: u64, cb_length: usize) -> Result<String, Box<dyn Error>> {
     let mut cb_str = String::new();
-    for i in 0..crate::CB_LENGTH {
-        let offset = (crate::CB_LENGTH - i - 1) * 2;
+    for i in 0..cb_length {
+        let offset = (cb_length - i - 1) * 2;
         let nt = (cb_id & (3 << offset)) >> offset;
 
         match nt {
