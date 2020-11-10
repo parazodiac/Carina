@@ -1,4 +1,4 @@
-# <img src="carina.png" width="40" height="40" /> Carina
+# <img src="carina.png" width="30" height="30" /> Carina [![Coverage Status](https://coveralls.io/repos/github/parazodiac/Carina/badge.svg)](https://coveralls.io/github/parazodiac/Carina) ![Rust](https://github.com/parazodiac/Carina/workflows/Rust/badge.svg)
 
 Footnotes:
 ----------
