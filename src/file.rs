@@ -18,7 +18,10 @@ pub fn file_path_from_clap(sub_m: &ArgMatches, clap_id: &str) -> Result<PathBuf,
     Ok(file_path)
 }
 
-pub fn files_path_from_clap(sub_m: &ArgMatches, clap_id: &str) -> Result<Vec<PathBuf>, Box<dyn Error>> {
+pub fn files_path_from_clap(
+    sub_m: &ArgMatches,
+    clap_id: &str,
+) -> Result<Vec<PathBuf>, Box<dyn Error>> {
     let files_str: Vec<&str> = sub_m
         .values_of(clap_id)
         .expect(&format!("can't find the flag: {}", clap_id))
