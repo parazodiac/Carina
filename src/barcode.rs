@@ -46,4 +46,13 @@ mod tests {
         let cb_id = cb_string_to_u64("T".repeat(16).as_bytes()).unwrap();
         assert_eq!(cb_id, u32::MAX as u64);
     }
+
+    #[test]
+    fn test_u64_to_cb_string() {
+        let cb_str = u64_to_cb_string(0, 16).unwrap();
+        assert_eq!("A".repeat(16), cb_str);
+
+        let cb_str = u64_to_cb_string(u32::MAX as u64, 16).unwrap();
+        assert_eq!("T".repeat(16), cb_str);
+    }
 }

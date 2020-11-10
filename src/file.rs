@@ -18,6 +18,24 @@ pub fn file_path_from_clap(sub_m: &ArgMatches, clap_id: &str) -> Result<PathBuf,
     Ok(file_path)
 }
 
+pub fn files_path_from_clap(sub_m: &ArgMatches, clap_id: &str) -> Result<Vec<PathBuf>, Box<dyn Error>> {
+    let files_str: Vec<&str> = sub_m
+        .values_of(clap_id)
+        .expect(&format!("can't find the flag: {}", clap_id))
+        .collect();
+
+    let mut files_path = Vec::new();
+    for file_str in files_str {
+        let file_path = Path::new(file_str)
+            .canonicalize()
+            .expect(&format!("Can't find absolute path of file tag {}", clap_id));
+        files_path.push(file_path);
+    }
+
+    info!("Found File w/ tag \"{}\" at {:?}", clap_id, files_path);
+    Ok(files_path)
+}
+
 pub fn bufreader_from_filepath(path: PathBuf) -> Result<BufReader<File>, Box<dyn Error>> {
     Ok(BufReader::new(File::open(path)?))
 }
