@@ -18,6 +18,20 @@ pub fn file_path_from_clap(sub_m: &ArgMatches, clap_id: &str) -> Result<PathBuf,
     Ok(file_path)
 }
 
+pub fn try_file_path_from_clap(sub_m: &ArgMatches, clap_id: &str) -> Option<PathBuf> {
+    let file_str = match sub_m.value_of(clap_id) {
+        Some(val) => val,
+        None => return None,
+    };
+
+    let file_path = Path::new(file_str)
+        .canonicalize()
+        .expect(&format!("Can't find absolute path of file tag {}", clap_id));
+
+    info!("Found File w/ tag \"{}\" at {:?}", clap_id, file_path);
+    Some(file_path)
+}
+
 pub fn files_path_from_clap(
     sub_m: &ArgMatches,
     clap_id: &str,
@@ -35,7 +49,7 @@ pub fn files_path_from_clap(
         files_path.push(file_path);
     }
 
-    info!("Found File w/ tag \"{}\" at {:?}", clap_id, files_path);
+    info!("Found File(s) w/ tag \"{}\" at {:?}", clap_id, files_path);
     Ok(files_path)
 }
 
