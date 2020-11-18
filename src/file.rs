@@ -74,3 +74,24 @@ pub fn bufwriter_from_clap(
 
     Ok(file)
 }
+
+pub fn bufwriter_from_clap_with_suffix(
+    sub_m: &ArgMatches,
+    clap_id: &str,
+    suffix: &str,
+) -> Result<BufWriter<File>, Box<dyn Error>> {
+    let file_str = sub_m
+        .value_of(clap_id)
+        .expect(&format!("can't find the flag: {}", clap_id));
+    
+    let file_str = &format!("{}.{}.is", file_str, suffix);
+
+    let file = BufWriter::new(File::create(file_str)?);
+    let file_path = Path::new(file_str)
+        .canonicalize()
+        .expect(&format!("Can't find absolute path of file tag {}", clap_id));
+
+    info!("Created File w/ tag \"{}\" at {:?}", clap_id, file_path);
+
+    Ok(file)
+}
