@@ -83,7 +83,7 @@ pub fn bufwriter_from_clap_with_suffix(
     let file_str = sub_m
         .value_of(clap_id)
         .expect(&format!("can't find the flag: {}", clap_id));
-    
+
     let file_str = &format!("{}.{}.is", file_str, suffix);
 
     let file = BufWriter::new(File::create(file_str)?);
